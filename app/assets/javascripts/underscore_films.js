@@ -70,38 +70,20 @@ bonds.oddBonds = function() {
 };
 
 bonds.bestBond = function() {
-
-  var groups = _.groupBy(bonds.films, function(film){return film.actor;});
-  // var movies = _.map(groups, function(v, k, o) {return v});
-
-  var movies = _.map(groups, function(v, k, o) {
-    // debugger
-    var numMovies = v.length;
-
-    var grossAmounts = _.map(v, function(film){
-      return bonds.gross( film );
-    });
-
-    var sum = _.reduce(grossAmounts, function(memo, num){ return memo + num;});
-    var avg = sum / numMovies;
-    var grossObj = _.object(['actor', 'gross'],[k, avg]);
-
-  return  grossObj; } );
-
-  return _.max(movies, function(grossCombo) { return grossCombo.gross;} );
+  return _.max(bonds.grossCombo(), function(grossCombo) { return grossCombo.gross;} );
 };
-
-
-
 
 
 bonds.worstBond = function() {
+  return _.min(bonds.grossCombo(), function(grossCombo) { return grossCombo.gross;} );
+};
 
+
+
+bonds.grossCombo = function() {
   var groups = _.groupBy(bonds.films, function(film){return film.actor;});
-  // var movies = _.map(groups, function(v, k, o) {return v});
 
   var movies = _.map(groups, function(v, k, o) {
-    // debugger
     var numMovies = v.length;
 
     var grossAmounts = _.map(v, function(film){
@@ -112,30 +94,10 @@ bonds.worstBond = function() {
     var avg = sum / numMovies;
     var grossObj = _.object(['actor', 'gross'],[k, avg]);
 
-  return  grossObj; } );
+    return  grossObj; } );
 
-  return _.min(movies, function(grossCombo) { return grossCombo.gross;} );
+  return movies;
 };
-
-// bonds.grossCombo = function() {
-//   var groups = _.groupBy(bonds.films, function(film){return film.actor;});
-//   // var movies = _.map(groups, function(v, k, o) {return v});
-
-//   var movies = _.map(groups, function(v, k, o) {
-//     // debugger
-//     var numMovies = v.length;
-
-//     var grossAmounts = _.map(v, function(film){
-//       return bonds.gross( film );
-//     });
-
-//     var sum = _.reduce(grossAmounts, function(memo, num){ return memo + num;});
-//     var avg = sum / numMovies;
-//     var grossObj = _.object(['actor', 'gross'],[k, avg]);
-
-//   return  grossObj; } );
-
-// };
 
 
 
