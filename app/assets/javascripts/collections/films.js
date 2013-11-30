@@ -1,15 +1,7 @@
-
-
-
-
 var Film = Backbone.Model.extend({
   gross: function(){
     return parseInt(this.get('gross').slice(1).split(',').join(''), null);
   }
-
-
-
-
 });
 
 
@@ -59,8 +51,6 @@ var Films = Backbone.Collection.extend({
     return _.min(bonds.grossCombo(), function(grossCombo) { return grossCombo.gross;} );
   },
 
-
-
   grossCombo: function(){
     var groups = _.groupBy(bonds.films, function(film){return film.actor;});
 
@@ -80,6 +70,12 @@ var Films = Backbone.Collection.extend({
   return movies;
 
   }
-
-
 });
+
+
+
+var FilmView = Backbone.View.exetend({
+  el:'.page',
+});
+
+

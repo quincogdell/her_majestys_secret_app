@@ -5,10 +5,32 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+
+  <script>
+    //  NOTE: http://stackoverflow.com/questions/7514922/rails-with-underscore-js-templates
+      _.templateSettings = {
+          interpolate: /\{\{\=(.+?)\}\}/g,
+          evaluate: /\{\{(.+?)\}\}/g
+      };
+  </script>
+
 </head>
+
+
+
+
 <body>
 
+
 <%= yield %>
+
+  <div id="container">
+    <h1>Bond Films</h1>
+    <div id="page">
+
+    </div>
+
+  </div>
 
 </body>
 </html>
