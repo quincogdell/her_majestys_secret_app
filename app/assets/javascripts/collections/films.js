@@ -1,10 +1,15 @@
+/////////////////////
+/////// MODEL
+/////////////////////
 var Film = Backbone.Model.extend({
   gross: function(){
     return parseInt(this.get('gross').slice(1).split(',').join(''), null);
   }
 });
 
-
+/////////////////////
+/////// COLLECTION
+/////////////////////
 var Films = Backbone.Collection.extend({
   model: Film,
 
@@ -71,11 +76,39 @@ var Films = Backbone.Collection.extend({
 
   }
 });
+/////////////////////
+/////// ROUTER
+/////////////////////
+// var router = Backbone.Router.extend({
+//   routes: {
+//     "": "home"
+//   }
+// });
 
 
-
-var FilmView = Backbone.View.exetend({
+/////////////////////
+/////// View
+/////////////////////
+var FilmView = Backbone.View.extend({
   el:'.page',
-});
+
+  render: function(){
+    var that = this;
+    var films = bonds.films;
+    var filmsC = new Films(films);
+    var template = _.template($('#film-list-template').html(), {filmsC: filmsC.models});
+
+    // debugger
+    // could use this...but kept as that in case of refactor for actual backend
+    that.$el.html(template);
+
+
+    // films.fetch({
+    //   success: function(films) {
+    //     var template = _.template($('film-list-template').html(), {films: films});
+    //     }
+    //   });
+    }
+  });
 
 
