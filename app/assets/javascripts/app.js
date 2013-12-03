@@ -16,8 +16,5 @@ $(function(){
     filmList.render();
   });
 
-
-
-
   Backbone.history.start();
 });
